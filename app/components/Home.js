@@ -1,23 +1,34 @@
-import React, { useState, Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import routes from '../constants/routes';
 import styles from './Home.css';
-import { getAccess, connectRock } from '../http/self';
+import { register } from '../http/self';
 
 const Home = () => {
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
+  const history = useHistory();
 
-  const connect = () => {
-    getAccess(url)
-      .then(body => {
-        console.info(body.access_token);
-        if (body.access_token) {
-          connectRock(body.access_token, name)
-            .then(connectBody => console.info(connectBody))
-            .catch();
+  const create = () => {
+    register(url, name)
+      .then(data => {
+        console.info(data);
+        if (data.status === 'success') {
+          console.info(data.status);
+          localStorage.setItem(
+            'cs_data',
+            JSON.stringify({
+              base: url,
+              authToken: data.data.authToken,
+              userId: data.data.userId,
+              subscribe: 'GENERAL'
+            })
+          );
+          history.push(routes.CHAT);
+        } else {
+          alert(JSON.stringify(data));
         }
-        return null;
+        return data;
       })
       .catch();
   };
@@ -39,7 +50,7 @@ const Home = () => {
           placeholder="name"
           onKeyPress={e => {
             if (e.key === 'Enter') {
-              connect();
+              create();
             }
           }}
         />
@@ -48,5 +59,4 @@ const Home = () => {
   );
 };
 
-export default Home
-
+export default Home;

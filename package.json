@@ -262,8 +262,14 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@hot-loader/react-dom": "^16.11.0",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "connected-react-router": "^6.6.0",
     "core-js": "3.4.1",
+    "dayjs": "^1.8.36",
+    "ddp": "^0.12.1",
+    "ddp-login": "^1.0.10",
     "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",
     "electron-log": "^3.0.9",
@@ -275,6 +281,7 @@
     "react-redux": "^7.1.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
+    "react-textarea-autosize": "^8.2.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "source-map-support": "^0.5.16"
